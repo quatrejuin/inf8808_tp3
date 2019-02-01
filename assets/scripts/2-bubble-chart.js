@@ -52,4 +52,6 @@ function createBubbleChart(g, data, x, y, r, color, tip) {
   .attr("cy",d=>{return y(d.income)})
   .attr("r",d=>{return r(d.population)})
   .attr("fill",d=>{return color(d.zone)})
+  .on('mouseover', tip.show)
+  .on('mouseout', tip.hide);
 }
