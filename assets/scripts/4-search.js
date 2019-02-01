@@ -16,6 +16,15 @@ function search(countrySelected, g) {
        - Mettre en évidence le pays sélectionné en coloriant le cercle en noir et en appliquant une opacité de 100%.
        - Appliquez une opacité de 15% aux cercles associés aux autres pays.
    */
+
+  // Dynamically add css style
+  g.select("style.search").remove()
+  g.insert("style",":first-child")
+  .attr("class","search")
+  .attr("type","text/css")
+  .html(".searchHighlight { fill: black; opacity: 1 } \
+  .searchGray { opacity: 0.15 }")
+
   g.select(".graph")
   .selectAll(".dot")
   .each(
@@ -24,12 +33,11 @@ function search(countrySelected, g) {
       
       if (d.name == countrySelected)
       {
-        circle.attr("fill", "black")
-        circle.attr("opacity", 1)
+        circle.attr("class", circle.attr("class")+" searchHighlight")
       }
       else
       {
-        circle.attr("opacity", 0.15)
+        circle.attr("class", circle.attr("class")+" searchGray")
       }
     }
     )
@@ -45,7 +53,5 @@ function reset(g) {
   // TODO: Réinitialiser l'affichage du nuage de points à celle par défaut.
   g.select(".graph")
   .selectAll(".dot")
-  .attr("fill", "black")
-  .attr("opacity", 0.15)
-
+  .attr("class","dot")
 }
