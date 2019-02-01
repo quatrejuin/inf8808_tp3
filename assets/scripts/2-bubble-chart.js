@@ -17,7 +17,14 @@
 function createAxes(g, xAxis, yAxis, height, width) {
   // TODO: Dessiner les axes X et Y du graphique.
   // Axe horizontal
+  g.append("g")
+  .attr("class","x axis")
+  .attr("transform","translate("+0+","+height+")")
+  .call(xAxis)
 
+  g.append("g")
+  .attr("class","y axis")
+  .call(yAxis)
 }
 
 /**
@@ -34,5 +41,15 @@ function createAxes(g, xAxis, yAxis, height, width) {
 function createBubbleChart(g, data, x, y, r, color, tip) {
   // TODO: Dessiner les cercles du graphique en utilisant les échelles spécifiées.
   //       Assurez-vous d'afficher l'infobulle spécifiée lorsqu'un cercle est survolé.
-
+  g.append("g")
+  .attr("class","graph")
+  .selectAll(".dot")
+  .data(data)
+  .enter()
+  .append("circle")
+  .attr("class","dot")
+  .attr("cx",d=>{return x(d.lifeExpectancy)})
+  .attr("cy",d=>{return y(d.income)})
+  .attr("r",d=>{return r(d.population)})
+  .attr("fill",d=>{return color(d.zone)})
 }

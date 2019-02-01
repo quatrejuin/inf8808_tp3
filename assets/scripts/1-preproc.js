@@ -13,7 +13,13 @@
  */
 function initializeData(data) {
   // TODO: Convertir les propriétés "income", "lifeExpectancy" et "population" au format "number" pour chacune des entrées.
-
+  data.map(
+    d => {
+      d.income = parseFloat(d.income)
+      d.lifeExpectancy = parseFloat(d.lifeExpectancy)
+      d.population = parseInt(d.population)
+    }
+    )
 }
 
 /**
@@ -23,7 +29,7 @@ function initializeData(data) {
  */
 function domainX(x) {
   // TODO: Préciser le domaine pour la variable "x" en prenant comme minimum et maximum les valeurs suivantes: 35 ans et 90 ans.
-
+  x.domain([35,90])
 }
 
 /**
@@ -33,7 +39,7 @@ function domainX(x) {
  */
 function domainY(y) {
   // TODO: Préciser le domaine pour la variable "y" en prenant comme minimum et maximum les valeurs suivantes: 0 USD et 140000 USD.
-
+  y.domain([0,140000])
 }
 
 /**
@@ -44,7 +50,11 @@ function domainY(y) {
  */
 function domainColor(color, data) {
   // TODO: Préciser le domaine de l'échelle de couleurs. Assurez-vous d'associer une zone du monde distincte pour chaque couleur.
-
+  let listZone=[]
+  data.forEach(
+    d =>{listZone.push(d.zone)}
+  )
+  color.domain(listZone)
 }
 
 /**
@@ -56,5 +66,7 @@ function domainColor(color, data) {
 function domainRadius(r, data) {
   // TODO: Préciser le domaine de l'échelle de la variable "r" em spécifiant comme valeurs extrêmes le minimum et le
   //       maximum des populations des pays.
-
+  r.domain([d3.min(data,d=>{return d.population}),
+    d3.max(data,d=>{return d.population})
+  ])
 }

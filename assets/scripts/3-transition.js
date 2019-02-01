@@ -20,5 +20,18 @@ function transition(g, data, x, y, r) {
        - Mettre à jour la taille du rayon des cercles.
        - La transition doit se faire en 1 seconde.
    */
+  // g.select(".graph")
+  // .selectAll(".dot")
+  // //.remove()
+
+  let circles = g.select(".graph")
+  .selectAll(".dot")
+  .data(data)
+  .transition("playyear")
+  .ease(d3.easeLinear)
+  .duration(1000)
+  .attr("cx",d=>{return x(d.lifeExpectancy)})
+  .attr("cy",d=>{return y(d.income)})
+  .attr("r",d=>{return r(d.population)})
 
 }
