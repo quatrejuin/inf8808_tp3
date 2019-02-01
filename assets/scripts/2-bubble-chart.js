@@ -17,14 +17,32 @@
 function createAxes(g, xAxis, yAxis, height, width) {
   // TODO: Dessiner les axes X et Y du graphique.
   // Axe horizontal
+
+  // l'Axe X
   g.append("g")
   .attr("class","x axis")
   .attr("transform","translate("+0+","+height+")")
   .call(xAxis)
 
+  g.append("text")             
+  .attr("transform",
+        "translate(" + width + " ," + 
+                       (height-10) + ")")
+  .style("text-anchor", "end")
+  .text("Expérance de vie (années) ");
+
+  // l'Axe Y
   g.append("g")
   .attr("class","y axis")
   .call(yAxis)
+
+  g.append("text")
+  .attr("transform", "rotate(-90)")
+  .attr("y", 0 )
+  .attr("x", 0 )
+  .attr("dy", "1em")
+  .style("text-anchor", "end")
+  .text("Revenu (USD)"); 
 }
 
 /**
